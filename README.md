@@ -94,7 +94,7 @@ In order to open up a Julia REPL in our text-editor, we are going to create a Bu
 ```
 When you save the file, it should automatically start in `~\Data\Packages\User` where you can save it with any name, for example `Julia-REPL.sublime-build`. The extension is important, so it's recognized as a build file. 
 
-Normally, Sublime Text's Build System is used to actually build or compile files and run them. We're using it to open up an interactive Julia REPL. The `shell_cmd: "julia --project=.` tells the terminal to open julia and activate the environment if there is any present. You can just remove the `--project=.` if you just want to open the julia REPL. We can only call julia in the terminal if julia is actually on the path. That's why we downloaded `juliaup`. In addition, we tell terminal to set the working directory as the path of the .jl file you currently have open. Lastly, the `post_window_hooks` makes the terminal open in a second pane and re-focuses the .jl source file. In this way we can open a Julia REPL in the environment where our .jl is in, and start coding right away without having to use the mouse. You should be able to test this new build with the short-cut `ctrl+b` or go to **Tools/Build/** and you can choose `Julia-REPL.sublime-build`.
+Normally, Sublime Text's Build System is used to actually build or compile files and run them. We're using it to open up an interactive Julia REPL. The `shell_cmd: "julia --project=."` tells the terminal to open julia and activate the environment if there is any present. You can just remove the `--project=.` if you just want to open the julia REPL. We can only call julia in the terminal if julia is actually on the path. That's why we downloaded `juliaup`. In addition, we tell terminal to set the working directory as the path of the .jl file you currently have open. Lastly, the `post_window_hooks` makes the terminal open in a second pane and re-focuses the .jl source file. In this way we can open a Julia REPL in the environment where our .jl is in, and start coding right away without having to use the mouse. You should be able to test this new build with the short-cut `ctrl+b` or go to **Tools/Build/** and you can choose `Julia-REPL.sublime-build`.
 
 Now that we have our julia REPL, we have to make sure SendCode targets our Terminus terminal when we are using Julia, such that we can send commands to the terminal. Select **Preferences/Package Settings/SendCode/Settings** and in the SendCode.sublime-settings file, paste below in. The SendCode (Windows).sublime-settings window on the left are the default settings for SendCode.
 
@@ -380,10 +380,16 @@ And I have attached keybinds to each command in the **Preferences/Key Bindings**
 ```
 
 Which means I can do the following quickly:
-**Reset terminal by closing all and opening one again**: `alt+q` -> `ctrl+b`
+
+**Reset terminal by closing all and opening one again**: `alt+q` -> `ctrl+b`. Of course due to the way we set up the build system, julia will automatically activate the same environment.
+
 **After cloning a julia project from github, activate the environment and instantiate the project**: `ctrl+b` -> `ctrl+i`
+
 **Clear Julia REPL**: `ctrl+q`
+
 **Check which method is being called for my code**: Highlight code -> `ctrl+m`
+
 **Check method that would be called of function**: Highlight code -> `ctrl+w`
+
 **Get help/documentation for anything**: Highlight code -> `ctrl+h`
 
