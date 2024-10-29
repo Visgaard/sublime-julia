@@ -393,3 +393,5 @@ Which means I can do the following quickly:
 
 **Get help/documentation for anything**: Highlight code -> `ctrl+h`
 
+## Final Remarks
+Of course, you don't have to go through these steps everytime you need to setup the workflow for a new device. Just download the portable sublime text from the .zip file and get coding. :-)
