@@ -56,16 +56,16 @@ Activating project at `~/Example.jl`
 
 The `instantiate` commands resolves the environment and installs anything missing. 
 
-### Using Sublime Text 4 with Julia
+## Using Sublime Text 4 with Julia
 
 In the following we describe how to set up the editor from scratch. Download
 the editor from the website [https://www.sublimetext.com/](https://www.sublimetext.com/). 
 
-#### Installing Package Control
+### Installing Package Control
 The first thing you would want to do is install the package **Package Control**.
 Use the menu item **Tools/Command Palette** (`ctrl+shift+P`), type `install`, and an item **Install Package Control** will show up. Click this one. The **Package Control** will allow us to install other packages for Sublime Text that we need for a good workflow with Julia.
 
-##### Packages to install
+#### Packages to install
 Julia: Bring up the **Command Palette**, and type **Package Control: Install Package** and select it. In the new window type `Julia`. A button named **Julia** (with the subtitle "Julia syntax highlighting for Sublime Text 4"; refer to [https://github.com/JuliaEditorSupport/Julia-sublime](https://github.com/JuliaEditorSupport/Julia-sublime)) will come up highlighted. Click on it, and the package will be installed. At this point one should be able to open a Julia source file and get it highlighted based upon the syntax of Julia.
 
 Terminus: Install the terminal emulation package **Terminus** (https://github.com/randy3k/Terminus). This will allow us to have a terminal inside Sublime Text.
@@ -74,7 +74,7 @@ SendCode: Install the package to enable communication between a source window (l
 
 Origami: Install the package to allow for some post-window hooks that come in handy for a smoother workflow. **Origami** (https://github.com/SublimeText/Origami).
 
-#### Minimal Customization
+### Minimal Customization
 In order to open up a Julia REPL in our text-editor, we are going to create a Build File. Go to **Tools/Build System/New Build System...**. Remove the content therein and paste below (again, thanks to [@PetrKryslUCSD](https://discourse.julialang.org/t/build-system-for-sublime-text-running-julia-in-terminus/95362)).
 
 ```
@@ -201,7 +201,7 @@ In order to send code to the terminal from our .jl file, we need to add some key
 
 Now we can send code-lines from our .jl file directly to the julia REPL with the command `ctrl+keypad_enter` either by selecting code or hovering on a code line. We can also include the entire .jl file with the command `ctrl+shift+b` to run everything.
 
-#### Extras
+### Extras
 If you can code in python, you can create custom plugins that allow you to do all sorts of things with Sublime Text. [@3b1b](https://github.com/3b1b/videos/tree/master/sublime_custom_commands) uses it when he creates videos with Manim. I have created my own julia commands that help my workflow. You need to create a .py file in the `Data\Packages\User` directory called `julia_plugins.py` for example. This is the place to put all your custom commands. Here is a list of mine:
 
 ```
