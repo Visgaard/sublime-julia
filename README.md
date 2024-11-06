@@ -74,6 +74,10 @@ SendCode: Install the package to enable communication between a source window (l
 
 Origami: Install the package to allow for some post-window hooks that come in handy for a smoother workflow. **Origami** (https://github.com/SublimeText/Origami).
 
+(Optional) MarkdownPreview: Install the package to preview markdown files such as README.md. **MarkdownPreview** (https://github.com/facelessuser/MarkdownPreview)
+
+(Optional) LiveReload: In addition to the **MarkdownPreview** above to enable auto-reloading of the .md file when you save it. **LiveReload** (https://github.com/alepez/LiveReload-sublimetext3)
+
 ### Minimal Customization
 In order to open up a Julia REPL in our text-editor, we are going to create a Build File. Go to **Tools/Build System/New Build System...**. Remove the content therein and paste below (again, thanks to [@PetrKryslUCSD](https://discourse.julialang.org/t/build-system-for-sublime-text-running-julia-in-terminus/95362)).
 
@@ -130,7 +134,7 @@ In order to send code to the terminal from our .jl file, we need to add some key
 
     // Include Julia file to run entire thing
     {
-        "keys": ["ctrl+shift+b"],
+        "keys": ["f5"],
         "command": "send_code",
         "args": {
             "code": "include(\"$file_name\")"
@@ -230,6 +234,14 @@ class MethodsJuliaCommand(sublime_plugin.TextCommand):
 
         if code:
             wrapped_code = f"methods({code})"
+            send_terminus_command(wrapped_code, clear = False, center = False)
+
+class TypeofJuliaCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        code = selected_or_code_line(self.view)
+
+        if code:
+            wrapped_code = f"typeof({code})"
             send_terminus_command(wrapped_code, clear = False, center = False)
 
 class ClearJuliaCommand(sublime_plugin.TextCommand):
@@ -378,12 +390,13 @@ And I have attached keybinds to each command in the **Preferences/Key Bindings**
 ]
 
 ```
-
 Which means I can do the following quickly:
 
 **Reset terminal by closing all and opening one again**: `alt+q` -> `ctrl+b`. Of course due to the way we set up the build system, julia will automatically activate the same environment.
 
 **After cloning a julia project from github, activate the environment and instantiate the project**: `ctrl+b` -> `ctrl+i`
+
+**Include julia file to run everything**: `f5`
 
 **Clear Julia REPL**: `ctrl+q`
 
@@ -391,7 +404,59 @@ Which means I can do the following quickly:
 
 **Check method that would be called of function**: Highlight code -> `ctrl+w`
 
+**Check the type of a variable**: Highlight code -> `f1`
+
 **Get help/documentation for anything**: Highlight code -> `ctrl+h`
+
+### (Optional) MarkdownPreview + LiveReload
+In the **Preferences/Key Bindings**, add the following
+
+```
+// Markdown Preview
+    { 
+        "keys": ["alt+m"], 
+        "command": "markdown_preview", 
+        "args": {
+            "target": "browser", 
+            "parser":"markdown"
+        } 
+    },
+```
+In order to get the live updates when editing the .md file, we need to enable autoreload. **Preferences/Package Settings/Markdown Preview/Settings** and set 
+```
+"enable_autoreload": true,
+```
+
+Then open **Tools/Command Palette** (`ctrl+shift+P`) and type `LiveReload: Enable/disable plug-ins` and select `Simple Reload with delay (400ms)`.
+
+If you need to write LaTeX equations, you can set up mathjax support by going to **Preferences/Package Settings/Markdown Preview/Settings** and in the right window paste the following
+
+```
+{
+    "enable_mathjax": true,
+    "js": [
+        "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML",
+        "res://MarkdownPreview/js/math_config.js",
+    ],
+    "markdown_extensions": [
+        "markdown.extensions.extra",
+        {
+            "pymdownx.arithmatex": {
+                "generic": true
+            }
+        },
+        {
+            "markdown.extensions.toc": {
+                "permalink": "\ue157"
+            }
+        }
+        //---- etc.
+    ]
+}
+
+```
+
+We can now edit our .md file and type `alt+m` to see it in our browser with live updates.
 
 ## Final Remarks
 Of course, you don't have to go through these steps everytime you need to setup the workflow for a new device. Just download the portable sublime text from the .zip file and get coding. :-)
