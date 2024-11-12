@@ -435,8 +435,7 @@ If you need to write LaTeX equations, you can set up mathjax support by going to
 {
     "enable_mathjax": true,
     "js": [
-        "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML",
-        "res://MarkdownPreview/js/math_config.js",
+        "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js",
     ],
     "markdown_extensions": [
         "markdown.extensions.extra",
@@ -450,7 +449,6 @@ If you need to write LaTeX equations, you can set up mathjax support by going to
                 "permalink": "\ue157"
             }
         }
-        //---- etc.
     ]
 }
 
