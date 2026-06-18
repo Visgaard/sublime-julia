@@ -1,0 +1,6 @@
+{
+    "cmd": ["C:\\Users\\Rvisg\\AppData\\Local\\Programs\\Quarto\\bin\\quarto.exe", "preview", "$file"],
+    "working_dir": "$file_path",
+    "selector": "source.quarto, text.html.markdown.quarto",
+    "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)"
+}

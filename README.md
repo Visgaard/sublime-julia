@@ -74,9 +74,7 @@ SendCode: Install the package to enable communication between a source window (l
 
 Origami: Install the package to allow for some post-window hooks that come in handy for a smoother workflow. **Origami** (https://github.com/SublimeText/Origami).
 
-(Optional) MarkdownPreview: Install the package to preview markdown files such as README.md. **MarkdownPreview** (https://github.com/facelessuser/MarkdownPreview)
-
-(Optional) LiveReload: In addition to the **MarkdownPreview** above to enable auto-reloading of the .md file when you save it. **LiveReload** (https://github.com/alepez/LiveReload-sublimetext3)
+(Optional) Quarto: Creating dynamic content with Julia using .qmd files, similar to markdown files. **Quarto** (https://quarto.org/)
 
 ### Minimal Customization
 In order to open up a Julia REPL in our text-editor, we are going to create a Build File. Go to **Tools/Build System/New Build System...**. Remove the content therein and paste below (again, thanks to [@PetrKryslUCSD](https://discourse.julialang.org/t/build-system-for-sublime-text-running-julia-in-terminus/95362)).
@@ -203,7 +201,7 @@ In order to send code to the terminal from our .jl file, we need to add some key
 
 ```
 
-Now we can send code-lines from our .jl file directly to the julia REPL with the command `ctrl+keypad_enter` either by selecting code or hovering on a code line. We can also include the entire .jl file with the command `ctrl+shift+b` to run everything.
+Now we can send code-lines from our .jl file directly to the julia REPL with the command `ctrl+keypad_enter` either by selecting code or hovering on a code line. We can also include the entire .jl file with the command `f5` to run everything.
 
 ### Extras
 If you can code in python, you can create custom plugins that allow you to do all sorts of things with Sublime Text. [@3b1b](https://github.com/3b1b/videos/tree/master/sublime_custom_commands) uses it when he creates videos with Manim. I have created my own julia commands that help my workflow. You need to create a .py file in the `Data\Packages\User` directory called `julia_plugins.py` for example. This is the place to put all your custom commands. Here is a list of mine:
@@ -402,59 +400,23 @@ Which means I can do the following quickly:
 
 **Check which method is being called for my code**: Highlight code -> `ctrl+m`
 
-**Check method that would be called of function**: Highlight code -> `ctrl+w`
+**Check which method that would be called for function**: Highlight code -> `ctrl+w`
 
 **Check the type of a variable**: Highlight code -> `f1`
 
 **Get help/documentation for anything**: Highlight code -> `ctrl+h`
 
-### (Optional) MarkdownPreview + LiveReload
-In the **Preferences/Key Bindings**, add the following
-
-```
-// Markdown Preview
-    { 
-        "keys": ["alt+m"], 
-        "command": "markdown_preview", 
-        "args": {
-            "target": "browser", 
-            "parser":"markdown"
-        } 
-    },
-```
-In order to get the live updates when editing the .md file, we need to enable autoreload. **Preferences/Package Settings/Markdown Preview/Settings** and set 
-```
-"enable_autoreload": true,
-```
-
-Then open **Tools/Command Palette** (`ctrl+shift+P`) and type `LiveReload: Enable/disable plug-ins` and select `Simple Reload with delay (400ms)`.
-
-If you need to write LaTeX equations, you can set up mathjax support by going to **Preferences/Package Settings/Markdown Preview/Settings** and in the right window paste the following
+### (Optional) Quarto build system
+Create a build system targeting .qmd files that will run the Quarto preview command on the file. It will open a localhost where live reloads changes you make to your .qmd files.
 
 ```
 {
-    "enable_mathjax": true,
-    "js": [
-        "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js",
-    ],
-    "markdown_extensions": [
-        "markdown.extensions.extra",
-        {
-            "pymdownx.arithmatex": {
-                "generic": true
-            }
-        },
-        {
-            "markdown.extensions.toc": {
-                "permalink": "\ue157"
-            }
-        }
-    ]
+    "cmd": ["C:\\Users\\Rvisg\\AppData\\Local\\Programs\\Quarto\\bin\\quarto.exe", "preview", "$file"],
+    "working_dir": "$file_path",
+    "selector": "source.quarto, text.html.markdown.quarto",
+    "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)"
 }
-
 ```
-
-We can now edit our .md file and type `alt+m` to see it in our browser with live updates.
 
 ## Final Remarks
 Of course, you don't have to go through these steps everytime you need to setup the workflow for a new device. Just download the portable sublime text from the .zip file and get coding. :-)

@@ -1,0 +1,179 @@
+[
+    // Close all terminals
+    { 
+        "keys": ["alt+q"], 
+        "command": "terminus_close_all", 
+    },
+
+    // Only close currently focused terminal
+    { 
+        "keys": ["alt+shift+q"], 
+        "command": "terminus_close", 
+        "context": [
+            { 
+                "key": "terminus_view" // Only for focused terminals
+            } 
+        ],
+    },
+
+    // Access to code evaluation. A current line,
+    // or a selection is passed to the terminal for evaluation
+    // (the command belongs to the SendCode package).
+    {
+        "keys": ["ctrl+keypad_enter"], 
+        "command": "send_code",
+        "context": [
+            { 
+                "key": "selector", 
+                "operator": "equal", 
+                "operand": "source.julia" 
+            }
+        ]
+    },
+
+    // Include Julia file to run entire thing
+    {
+        "keys": ["f5"],
+        "command": "send_code",
+        "args": {
+            "code": "include(\"$file_name\");"
+        },
+        "context": [
+            { 
+            "key": "selector", 
+            "operator": "equal", 
+            "operand": "source.julia" 
+            }
+        ]
+    },
+
+    // Display help information
+    {
+        "keys": ["ctrl+h"], 
+        "command": "help_julia",
+        "context": [
+            { 
+            "key": "selector", 
+            "operator": "equal", 
+            "operand": "source.julia" 
+            }
+        ]
+    },
+
+    // Display which method
+    {
+        "keys": ["ctrl+w"],
+        "command": "which_julia",
+        "context": [
+            {
+            "key": "selector", 
+            "operator": "equal", 
+            "operand": "source.julia" 
+            }
+        ]
+    },
+
+    // Display all methods
+    {
+        "keys": ["ctrl+m"],
+        "command": "methods_julia",
+        "context": [
+            {
+            "key": "selector", 
+            "operator": "equal", 
+            "operand": "source.julia" 
+            }
+        ]
+    },
+
+    // Displat Typeof
+    {
+        "keys": ["f1"],
+        "command": "typeof_julia",
+        "context": [
+            {
+            "key": "selector", 
+            "operator": "equal", 
+            "operand": "source.julia" 
+            }
+        ]
+    },
+
+    // Instantiate Project
+    {
+        "keys": ["ctrl+i"],
+        "command": "instantiate_julia",
+        "context": [
+            {
+            "key": "selector", 
+            "operator": "equal", 
+            "operand": "source.julia" 
+            }
+        ]
+    },
+
+    // Clear Julia REPL
+    {
+        "keys": ["ctrl+q"],
+        "command": "clear_julia",
+        "context": [
+            {
+            "key": "selector", 
+            "operator": "equal", 
+            "operand": "source.julia" 
+            }
+        ]
+    },
+
+    // To make the copy and paste keys work in the Terminus window
+    // (otherwise they are ctrl+shift+c, ctrl+shift+v)
+    { 
+        "keys": ["ctrl+c"], 
+        "command": "terminus_copy",
+        "context": [
+            { "key": "terminus_view" },
+            { "key": "terminus_view.natural_keyboard" },
+            { 
+                "key": "selection_empty", 
+                "operator": "equal", 
+                "operand": false, 
+                "match_all": true 
+            }
+        ]
+    },
+    { 
+        "keys": ["ctrl+v"], 
+        "command": "terminus_paste",
+        "context": [
+            { "key": "terminus_view" },
+            { "key": "terminus_view.natural_keyboard" }
+        ]
+    },
+
+    // Making Julia understand alt+left and alt+right
+    { 
+        "keys": ["alt+left"], 
+        "command": "terminus_keypress", 
+        "args": {
+            "key": "b", "alt": true
+        }, 
+        "context": [
+            {
+                "key": "terminus_view"
+            }
+        ] 
+    },
+    { 
+        "keys": ["alt+right"], 
+        "command": "terminus_keypress", 
+        "args": {
+            "key": "f", 
+            "alt": true
+        }, 
+        "context": [
+            {
+                "key": "terminus_view"
+            }
+        ] 
+    },
+]

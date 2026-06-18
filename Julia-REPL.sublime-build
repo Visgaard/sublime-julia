@@ -1,0 +1,13 @@
+{ // This build system simply opens a new interactive Julia REPL 
+    "title": "Julia REPL",
+    "target": "terminus_open",
+    "auto_close": false,
+    "shell_cmd": "julia --project=.", 
+    "cwd": "${file_path:${folder}}",
+    "selector": "source.julia",   
+    "post_window_hooks": [ 
+       ["carry_file_to_pane", {"direction": "right"}], // Origami command
+        ["focus_group", {"group": 0}] // Hack to focus on file instead of terminal
+    ],
+    "file_regex": "(?:[@](?:\\s\\S[\\w.]*[^@])??|in expression starting at)\\s(\\S+[.]jl):([0-9]+)"
+}
