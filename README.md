@@ -85,7 +85,7 @@ In order to open up a Julia REPL in our text-editor, we are going to create a Bu
     "target": "terminus_open",
     "auto_close": false,
     "shell_cmd": "julia --project=.", 
-    "cwd": "${file_path:${folder}}",
+    "cwd": "${folder}",
     "selector": "source.julia",   
     "post_window_hooks": [ 
        ["carry_file_to_pane", {"direction": "right"}], // Origami command
